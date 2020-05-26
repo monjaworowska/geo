@@ -1,4 +1,25 @@
 body {
-  background-color: #33adff; }
+  background-color: #e6f5ff; }
+
+#map {
+  margin-bottom: 5px; }
+
+form {
+  display: inline-block; }
+
+input, button {
+  padding: 10px;
+  font-size: 1rem; }
+
+@media only screen and (min-width: 768px) {
+  input, button {
+    font-size: 16px; } }
+button {
+  color: #fff;
+  border: none; }
+  button#find {
+    background-color: #008ae6; }
+  button#show {
+    background-color: #33adff; }
 
 /*# sourceMappingURL=style.css.map */

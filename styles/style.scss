@@ -7,5 +7,35 @@ $color5: #e6f5ff; //bright
 $baseSize: 10px;
 
 body{
-	background-color: $color3;
+	background-color: $color5;
+}
+
+#map{
+    margin-bottom: 5px;
+}
+
+form{
+    display: inline-block;
+}
+
+input, button{
+    padding: $baseSize;
+    font-size: 1rem;
+}
+
+@media only screen and (min-width: 768px){
+	input, button{
+		font-size: $baseSize * 1.6;
+	}
+}
+
+button{
+    color: #fff;
+    border: none;
+    &#find{
+        background-color: $color2;
+    }
+    &#show{
+        background-color: $color3;
+    }
 }
