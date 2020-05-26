@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Geolocalisation and geocoding app.</title>
+		<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+		<link rel="stylesheet" href="styles/style.css">
+	</head>
+	<body>
+
+		<div id="map" style="width: 100%; height: 50vh;"></div>
+        <form>
+            <input type="text" placeholder="Where are you?">
+            <button type="submit" id="show">Show on map</button>
+        </form>
+        <button id="find" hidden>Find me</button>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+		<script src="script.js"></script>
+	</body>
+</html>
