@@ -2,6 +2,66 @@
 
 	const geo = {
 
+		/* Adding and clearing position marker */
+
+        clearMarker: function(){
+            this.map.removeLayer(this.marker);
+        },
+
+		addMarker: function(pos){
+
+            this.clearMarker();
+
+            this.marker = new ol.layer.Vector({
+             source: new ol.source.Vector({
+                 features: [
+                     new ol.Feature({
+                         geometry: new ol.geom.Point(ol.proj.fromLonLat([pos[0], pos[1]]))
+                     })
+                 ]
+             }),
+             style: new ol.style.Style({
+              image: new ol.style.Icon({
+                anchor: [0.5, 0.5],
+                anchorXUnits: "fraction",
+                anchorYUnits: "fraction",
+                src: "https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg"
+              })
+            })
+            });
+
+            this.map.setView(new ol.View({
+                center: ol.proj.fromLonLat([pos[0], pos[1]]),
+                zoom: 10
+            }));
+
+            this.map.addLayer(this.marker);
+
+        },
+
+		/* User position geocoding */
+
+        getCoord: function(){
+              this.data = {
+                    "format": "json",
+                    "addressdetails": 1,
+                    "q": this.from,
+                    "limit": 1
+              };
+              return new Promise((resolve, reject) => {
+                    $.ajax({
+                      method: "GET",
+                      url: "https://nominatim.openstreetmap.org",
+                      data: this.data,
+                      success: function(msg) {
+                        resolve(msg)
+                      },
+                      error: function(error) {
+                        reject(error)
+                      }
+                    });
+              });
+        },
 
 		init: function(options){
 
@@ -33,6 +93,25 @@
             catch(e){
                 return;
             }
+
+			/* User position geocoding */
+
+            this.showForm.onsubmit = (e) => {
+
+                e.preventDefault();
+                this.from = this.fromInput.value;
+                this.getCoord()
+                    .then(data => {
+                        this.data = data;
+                        this.addMarker([Number(this.data[0].lon), Number(this.data[0].lat)]);
+                        this.fromInput.value = "";
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+
+            };
+
 
 		}
 	};
