@@ -63,6 +63,37 @@
               });
         },
 
+		/* User position geolocation */
+
+        getUserPosition: function(){
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    this.addMarker([Number(position.coords.longitude), Number(position.coords.latitude)]);
+                },
+                function(error){
+                    console.log("Błąd");
+                },
+                {
+                    enableHighAccuracy: true
+                }
+          );
+
+        },
+
+		isGeoLocationSupported: function(){
+
+            if(navigator.geolocation){
+
+                this.find.hidden = false;
+
+                this.find.onclick = (e) => {
+                    this.getUserPosition();
+                };
+            }
+
+        },
+
 		init: function(options){
 
 			this.options = options;
@@ -112,6 +143,9 @@
 
             };
 
+			/* User position geolocation*/
+
+            this.isGeoLocationSupported();
 
 		}
 	};
