@@ -1,3 +1,3 @@
 ### GeoApp
 
-> Geolocalisation and geocoding app. https://github.com/monjaworowska/geo
+> Geolocalisation and geocoding app. https://monjaworowska.github.io/geo/
